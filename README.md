@@ -397,7 +397,7 @@ Cari bagian `CLOSE_X1`, `CLOSE_X2`, dll dan sesuaikan:
 
 ---
 
-## ⚡ **OPTIMASI LANJUTAN**
+##  **OPTIMASI LANJUTAN**
 
 ### Optimasi 1: Fine Tuning Target
 Setelah testing dasar berhasil, Anda bisa:
@@ -478,10 +478,6 @@ Sebelum sistem siap digunakan, pastikan:
 - ✅ Simpan backup kode
 
 ---
-
-## 🎉 **SELAMAT!**
-
-Sistem kontrol motor kolimator rontgen Anda sudah siap digunakan dengan pengaturan yang optimal. 
 
 **Tips penggunaan**:
 - Monitor sistem secara berkala
