@@ -3,17 +3,6 @@
 
 ---
 
-## 📋 **DAFTAR ISI**
-1. [Persiapan Hardware](#persiapan-hardware)
-2. [Kalibrasi Potensiometer](#kalibrasi-potensiometer)
-3. [Menentukan Target Nilai](#menentukan-target-nilai)
-4. [Mengatur Kode Arduino](#mengatur-kode-arduino)
-5. [Testing dan Validasi](#testing-dan-validasi)
-6. [Troubleshooting](#troubleshooting)
-7. [Optimasi Lanjutan](#optimasi-lanjutan)
-
----
-
 ## 🔧 **PERSIAPAN HARDWARE**
 
 ### Hardware yang Diperlukan:
