@@ -582,9 +582,9 @@ void selesaiKolimasi() {
 
   layar.setCursor(50, 250);
   remot.setCursor(20, 140);
-  layar.print("Status: "); layar.print(sesuai ? "SESUAI" : "TIDAK SESUAI");
-  remot.print("Status: "); remot.print(sesuai ? "SESUAI" : "TIDAK SESUAI");
-  Serial.print("Status: "); Serial.println(sesuai ? "SESUAI" : "TIDAK SESUAI");
+  layar.print("Status: "); layar.print(statusKolimasiBerhasil ? "SESUAI" : "TIDAK SESUAI");
+  remot.print("Status: "); remot.print(statusKolimasiBerhasil ? "SESUAI" : "TIDAK SESUAI");
+  Serial.print("Status: "); Serial.println(statusKolimasiBerhasil ? "SESUAI" : "TIDAK SESUAI");
 
   // Hanya tampilkan tombol KEMBALI
 
