@@ -1,5 +1,5 @@
 # PANDUAN MENGATUR SISTEM KONTROL MOTOR KOLIMATOR RONTGEN
-## Step by Step Guide
+## Step by Step Guide - Versi Terbaru (main_code_27072247.ino)
 
 ---
 
@@ -43,7 +43,7 @@ YREAD2: Pin A3
 ## 📊 **KALIBRASI POTENSIOMETER**
 
 ### Langkah 1: Upload Kode Dasar
-1. Upload kode `main_code_xxxxxxxx.ino` ke Arduino
+1. Upload kode `main_code_27072247.ino` ke Arduino
 2. Buka Serial Monitor (115200 baud)
 3. Pastikan hardware terhubung dengan benar
 
@@ -68,24 +68,24 @@ YREAD2: Pin A3
 ### Contoh Hasil Kalibrasi:
 ```
 Potensiometer X1:
-- Minimum (tertutup): 50
-- Maksimum (terbuka): 950
-- Range: 50-950
+- Minimum (tertutup): 100
+- Maksimum (terbuka): 900
+- Range: 100-900
 
 Potensiometer X2:
-- Minimum (tertutup): 45
-- Maksimum (terbuka): 945
-- Range: 45-945
+- Minimum (tertutup): 100
+- Maksimum (terbuka): 900
+- Range: 100-900
 
 Potensiometer Y1:
-- Minimum (tertutup): 55
-- Maksimum (terbuka): 955
-- Range: 55-955
+- Minimum (tertutup): 100
+- Maksimum (terbuka): 900
+- Range: 100-900
 
 Potensiometer Y2:
-- Minimum (tertutup): 40
-- Maksimum (terbuka): 940
-- Range: 40-940
+- Minimum (tertutup): 100
+- Maksimum (terbuka): 900
+- Range: 100-900
 ```
 
 ---
@@ -94,48 +94,48 @@ Potensiometer Y2:
 
 ### Langkah 1: Tentukan Posisi Referensi
 Berdasarkan kalibrasi, tentukan:
-- **Posisi tertutup** = nilai minimum (misal: 50)
-- **Posisi terbuka** = nilai maksimum (misal: 950)
+- **Posisi tertutup** = nilai minimum (misal: 100)
+- **Posisi terbuka** = nilai maksimum (misal: 900)
 - **Posisi tengah** = (min + max) / 2 (misal: 500)
 
 ### Langkah 2: Tentukan Ukuran Film
 Berdasarkan kebutuhan, tentukan:
-- **18x24 cm** = posisi kecil (misal: 200)
+- **18x24 cm** = posisi kecil (misal: 250)
 - **24x30 cm** = posisi sedang (misal: 350)
-- **30x40 cm** = posisi besar (misal: 500)
-- **35x43 cm** = posisi terbesar (misal: 650)
+- **30x40 cm** = posisi besar (misal: 450)
+- **35x43 cm** = posisi terbesar (misal: 550)
 
 ### Langkah 3: Tentukan Target Iluminasi
-- **25x25 cm** = posisi standar untuk iluminasi (misal: 250)
+- **25x25 cm** = posisi standar untuk iluminasi (misal: 250) - sama dengan ukuran 18x24 cm
 
 ### Contoh Target Berdasarkan Kalibrasi:
 ```cpp
 // Posisi tertutup
-#define CLOSE_X1  50
-#define CLOSE_X2  45
-#define CLOSE_Y1  55
-#define CLOSE_Y2  40
+#define CLOSE_X1  100
+#define CLOSE_X2  100
+#define CLOSE_Y1  100
+#define CLOSE_Y2  100
 
 // Target ukuran film
-#define TARGET_18x24_X1  200
-#define TARGET_18x24_X2  200
-#define TARGET_18x24_Y1  200
-#define TARGET_18x24_Y2  200
+#define TARGET_18x24_X1  250
+#define TARGET_18x24_X2  250
+#define TARGET_18x24_Y1  250
+#define TARGET_18x24_Y2  250
 
 #define TARGET_24x30_X1  350
 #define TARGET_24x30_X2  350
 #define TARGET_24x30_Y1  350
 #define TARGET_24x30_Y2  350
 
-#define TARGET_30x40_X1  500
-#define TARGET_30x40_X2  500
-#define TARGET_30x40_Y1  500
-#define TARGET_30x40_Y2  500
+#define TARGET_30x40_X1  450
+#define TARGET_30x40_X2  450
+#define TARGET_30x40_Y1  450
+#define TARGET_30x40_Y2  450
 
-#define TARGET_35x43_X1  650
-#define TARGET_35x43_X2  650
-#define TARGET_35x43_Y1  650
-#define TARGET_35x43_Y2  650
+#define TARGET_35x43_X1  550
+#define TARGET_35x43_X2  550
+#define TARGET_35x43_Y1  550
+#define TARGET_35x43_Y2  550
 
 // Target iluminasi
 #define TARGET_ILUMINASI_X1  250
@@ -149,7 +149,7 @@ Berdasarkan kebutuhan, tentukan:
 ## ⚙️ **MENGATUR KODE ARDUINO**
 
 ### Langkah 1: Buka File Kode
-1. Buka file `main_code_xxxxxx.ino` di Arduino IDE
+1. Buka file `main_code_27072247.ino` di Arduino IDE
 2. Cari bagian **"Target nilai potensiometer"** (sekitar baris 54-75)
 
 ### Langkah 2: Atur Target Nilai
@@ -157,25 +157,25 @@ Ganti nilai target sesuai kalibrasi Anda:
 
 ```cpp
 // Ganti nilai ini sesuai kalibrasi Anda
-#define TARGET_18x24_X1  200  // ← Sesuaikan dengan sistem Anda
-#define TARGET_18x24_X2  200  // ← Sesuaikan dengan sistem Anda
-#define TARGET_18x24_Y1  200  // ← Sesuaikan dengan sistem Anda
-#define TARGET_18x24_Y2  200  // ← Sesuaikan dengan sistem Anda
+#define TARGET_18x24_X1  250  // ← Sesuaikan dengan sistem Anda
+#define TARGET_18x24_X2  250  // ← Sesuaikan dengan sistem Anda
+#define TARGET_18x24_Y1  250  // ← Sesuaikan dengan sistem Anda
+#define TARGET_18x24_Y2  250  // ← Sesuaikan dengan sistem Anda
 
 #define TARGET_24x30_X1  350  // ← Sesuaikan dengan sistem Anda
 #define TARGET_24x30_X2  350  // ← Sesuaikan dengan sistem Anda
 #define TARGET_24x30_Y1  350  // ← Sesuaikan dengan sistem Anda
 #define TARGET_24x30_Y2  350  // ← Sesuaikan dengan sistem Anda
 
-#define TARGET_30x40_X1  500  // ← Sesuaikan dengan sistem Anda
-#define TARGET_30x40_X2  500  // ← Sesuaikan dengan sistem Anda
-#define TARGET_30x40_Y1  500  // ← Sesuaikan dengan sistem Anda
-#define TARGET_30x40_Y2  500  // ← Sesuaikan dengan sistem Anda
+#define TARGET_30x40_X1  450  // ← Sesuaikan dengan sistem Anda
+#define TARGET_30x40_X2  450  // ← Sesuaikan dengan sistem Anda
+#define TARGET_30x40_Y1  450  // ← Sesuaikan dengan sistem Anda
+#define TARGET_30x40_Y2  450  // ← Sesuaikan dengan sistem Anda
 
-#define TARGET_35x43_X1  650  // ← Sesuaikan dengan sistem Anda
-#define TARGET_35x43_X2  650  // ← Sesuaikan dengan sistem Anda
-#define TARGET_35x43_Y1  650  // ← Sesuaikan dengan sistem Anda
-#define TARGET_35x43_Y2  650  // ← Sesuaikan dengan sistem Anda
+#define TARGET_35x43_X1  550  // ← Sesuaikan dengan sistem Anda
+#define TARGET_35x43_X2  550  // ← Sesuaikan dengan sistem Anda
+#define TARGET_35x43_Y1  550  // ← Sesuaikan dengan sistem Anda
+#define TARGET_35x43_Y2  550  // ← Sesuaikan dengan sistem Anda
 
 #define TARGET_ILUMINASI_X1  250  // ← Sesuaikan dengan sistem Anda
 #define TARGET_ILUMINASI_X2  250  // ← Sesuaikan dengan sistem Anda
@@ -209,10 +209,10 @@ const unsigned long timeout = 30000; // ← Atur nilai ini (dalam milidetik)
 Cari bagian `CLOSE_X1`, `CLOSE_X2`, dll dan sesuaikan:
 
 ```cpp
-#define CLOSE_X1  50   // ← Sesuaikan dengan nilai minimum X1
-#define CLOSE_X2  45   // ← Sesuaikan dengan nilai minimum X2
-#define CLOSE_Y1  55   // ← Sesuaikan dengan nilai minimum Y1
-#define CLOSE_Y2  40   // ← Sesuaikan dengan nilai minimum Y2
+#define CLOSE_X1  100   // ← Sesuaikan dengan nilai minimum X1
+#define CLOSE_X2  100   // ← Sesuaikan dengan nilai minimum X2
+#define CLOSE_Y1  100   // ← Sesuaikan dengan nilai minimum Y1
+#define CLOSE_Y2  100   // ← Sesuaikan dengan nilai minimum Y2
 ```
 
 ### Langkah 6: Upload Kode
@@ -244,15 +244,16 @@ Cari bagian `CLOSE_X1`, `CLOSE_X2`, dll dan sesuaikan:
 **Tujuan**: Memastikan target nilai sesuai dengan ukuran film
 
 **Langkah**:
-1. Pilih ukuran "18x24 cm"
-2. Perhatikan target yang digunakan
-3. Pilih ukuran "24x30 cm"
-4. Perhatikan target yang digunakan
-5. Lakukan untuk semua ukuran
+1. Pilih ukuran "18x24 cm" → Target: 250
+2. Pilih ukuran "24x30 cm" → Target: 350
+3. Pilih ukuran "30x40 cm" → Target: 450
+4. Pilih ukuran "35x43 cm" → Target: 550
+5. Perhatikan target yang digunakan di Serial Monitor
 
 **Expected Result**:
 - ✅ Target sesuai dengan ukuran film
-- ✅ Nilai target masuk akal (tidak terlalu kecil atau besar)
+- ✅ Nilai target masuk akal (250, 350, 450, 550)
+- ✅ Target iluminasi sama dengan 18x24 cm (250)
 
 ### Test 3: Motor Movement Control
 **Tujuan**: Memastikan motor bergerak sampai target tercapai
@@ -299,13 +300,15 @@ Cari bagian `CLOSE_X1`, `CLOSE_X2`, dll dan sesuaikan:
 **Langkah**:
 1. Pilih mode "UJI ILUMINASI"
 2. Monitor gerakan motor
-3. Pastikan target yang digunakan sesuai (misal: 250)
+3. Pastikan target yang digunakan sesuai (250 - sama dengan 18x24 cm)
 4. Test tombol "TERCAPAI", "TIDAK", "KEMBALI"
+5. Jika "TIDAK", motor akan bergerak ulang ke target yang sama
 
 **Expected Result**:
-- ✅ Motor bergerak ke target yang ditentukan untuk semua axis
+- ✅ Motor bergerak ke target 250 untuk semua axis
 - ✅ Lampu menyala setelah motor selesai
 - ✅ Tombol validasi berfungsi dengan benar
+- ✅ Jika tidak tercapai, motor bergerak ulang ke target yang sama
 
 ### Test 7: Reset Function
 **Tujuan**: Memastikan fungsi reset pintu berfungsi
@@ -314,10 +317,12 @@ Cari bagian `CLOSE_X1`, `CLOSE_X2`, dll dan sesuaikan:
 1. Buka pintu dengan memilih ukuran film
 2. Tekan tombol "KEMBALI"
 3. Monitor gerakan motor menutup pintu
+4. Perhatikan target CLOSE (100) di Serial Monitor
 
 **Expected Result**:
-- ✅ Motor bergerak menutup pintu sampai target CLOSE
+- ✅ Motor bergerak menutup pintu sampai target CLOSE (100)
 - ✅ Semua motor berhenti setelah pintu tertutup
+- ✅ Status "SESUAI" jika semua motor mencapai target
 
 ---
 
@@ -404,7 +409,7 @@ Setelah testing dasar berhasil, Anda bisa:
 
 1. **Atur target lebih presisi**:
    ```cpp
-   // Contoh: Jika 18x24 cm sebenarnya butuh 220, bukan 200
+   // Contoh: Jika 18x24 cm sebenarnya butuh 220, bukan 250
    #define TARGET_18x24_X1  220
    #define TARGET_18x24_X2  220
    #define TARGET_18x24_Y1  220
@@ -431,6 +436,11 @@ Jika motor bergerak terlalu lambat atau cepat:
    if (millis() - lastUpdate > 500) { // Ubah dari 500 ke 200 untuk update lebih cepat
    ```
 
+3. **Atur toleransi untuk kecepatan**:
+   ```cpp
+   #define toleransi 30; // Lebih kecil = lebih presisi tapi lebih lambat
+   ```
+
 ### Optimasi 3: Safety Features
 Tambahkan fitur keamanan:
 
@@ -444,6 +454,8 @@ Perbaiki tampilan user:
 1. **Progress bar** untuk menunjukkan progress motor
 2. **Countdown timer** untuk menunjukkan sisa waktu
 3. **Error messages** yang lebih informatif
+4. **Status real-time** untuk setiap motor (OK/NG)
+5. **Target vs Actual** display untuk monitoring presisi
 
 ---
 
@@ -481,12 +493,21 @@ Sebelum sistem siap digunakan, pastikan:
 
 ## 🎉 **SELAMAT!**
 
-Sistem kontrol motor kolimator rontgen Anda sudah siap digunakan dengan pengaturan yang optimal. 
+Sistem kontrol motor kolimator rontgen Anda sudah siap digunakan dengan pengaturan yang optimal berdasarkan kode `main_code_27072247.ino`. 
+
+**Fitur Utama yang Sudah Diperbaiki**:
+- ✅ **Target spesifik untuk setiap ukuran film** (250, 350, 450, 550)
+- ✅ **Kontrol motor berbasis target** dengan feedback real-time
+- ✅ **Timeout safety** 30 detik untuk mencegah kerusakan
+- ✅ **Touchscreen yang berfungsi** dengan area mapping yang tepat
+- ✅ **Mode iluminasi** dengan target 25x25 cm (250)
+- ✅ **Reset pintu** yang konsisten dan presisi
 
 **Tips penggunaan**:
 - Monitor sistem secara berkala
 - Lakukan kalibrasi ulang jika diperlukan
 - Backup kode dan setting secara rutin
 - Dokumentasikan perubahan yang dilakukan
+- Perhatikan nilai target di Serial Monitor untuk debugging
 
 **Untuk pertanyaan lebih lanjut**, silakan konsultasikan dengan tim pengembang atau referensi dokumentasi yang telah dibuat. 
