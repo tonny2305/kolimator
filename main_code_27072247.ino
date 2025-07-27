@@ -134,11 +134,13 @@ void kontrolMotorSampaiTarget(int targetX1, int targetX2, int targetY1, int targ
     y1Sesuai = abs(y1 - targetY1) <= toleransi;
     y2Sesuai = abs(y2 - targetY2) <= toleransi;
     
-    // Kontrol motor X1
+    // Kontrol motor X1 (Pintu Depan Kiri)
     if (!x1Sesuai) {
       if (x1 < targetX1 - toleransi) {
+        // Buka pintu depan kiri (ke kiri)
         digitalWrite(XLEAF1A, HIGH); digitalWrite(XLEAF1B, LOW);
       } else if (x1 > targetX1 + toleransi) {
+        // Tutup pintu depan kiri (ke kanan)
         digitalWrite(XLEAF1A, LOW); digitalWrite(XLEAF1B, HIGH);
       } else {
         digitalWrite(XLEAF1A, LOW); digitalWrite(XLEAF1B, LOW);
@@ -147,11 +149,13 @@ void kontrolMotorSampaiTarget(int targetX1, int targetX2, int targetY1, int targ
       digitalWrite(XLEAF1A, LOW); digitalWrite(XLEAF1B, LOW);
     }
     
-    // Kontrol motor X2
+    // Kontrol motor X2 (Pintu Depan Kanan)
     if (!x2Sesuai) {
       if (x2 < targetX2 - toleransi) {
+        // Buka pintu depan kanan (ke kanan)
         digitalWrite(XLEAF2A, HIGH); digitalWrite(XLEAF2B, LOW);
       } else if (x2 > targetX2 + toleransi) {
+        // Tutup pintu depan kanan (ke kiri)
         digitalWrite(XLEAF2A, LOW); digitalWrite(XLEAF2B, HIGH);
       } else {
         digitalWrite(XLEAF2A, LOW); digitalWrite(XLEAF2B, LOW);
@@ -160,11 +164,13 @@ void kontrolMotorSampaiTarget(int targetX1, int targetX2, int targetY1, int targ
       digitalWrite(XLEAF2A, LOW); digitalWrite(XLEAF2B, LOW);
     }
     
-    // Kontrol motor Y1
+    // Kontrol motor Y1 (Pintu Belakang Kiri)
     if (!y1Sesuai) {
       if (y1 < targetY1 - toleransi) {
+        // Buka pintu belakang kiri (ke atas)
         digitalWrite(YLEAF1A, HIGH); digitalWrite(YLEAF1B, LOW);
       } else if (y1 > targetY1 + toleransi) {
+        // Tutup pintu belakang kiri (ke bawah)
         digitalWrite(YLEAF1A, LOW); digitalWrite(YLEAF1B, HIGH);
       } else {
         digitalWrite(YLEAF1A, LOW); digitalWrite(YLEAF1B, LOW);
@@ -173,11 +179,13 @@ void kontrolMotorSampaiTarget(int targetX1, int targetX2, int targetY1, int targ
       digitalWrite(YLEAF1A, LOW); digitalWrite(YLEAF1B, LOW);
     }
     
-    // Kontrol motor Y2
+    // Kontrol motor Y2 (Pintu Belakang Kanan)
     if (!y2Sesuai) {
       if (y2 < targetY2 - toleransi) {
+        // Buka pintu belakang kanan (ke bawah)
         digitalWrite(YLEAF2A, HIGH); digitalWrite(YLEAF2B, LOW);
       } else if (y2 > targetY2 + toleransi) {
+        // Tutup pintu belakang kanan (ke atas)
         digitalWrite(YLEAF2A, LOW); digitalWrite(YLEAF2B, HIGH);
       } else {
         digitalWrite(YLEAF2A, LOW); digitalWrite(YLEAF2B, LOW);
@@ -276,6 +284,146 @@ void dapatkanTargetUkuran(int ukuran, int& targetX1, int& targetX2, int& targetY
       targetY2 = TARGET_18x24_Y2;
       break;
   }
+}
+
+// Fungsi untuk mengontrol motor dengan arah yang diperbaiki
+void kontrolMotorSampaiTargetPerbaikan(int targetX1, int targetX2, int targetY1, int targetY2) {
+  Serial.println("=== MENGONTROL MOTOR SAMPAI TARGET (PERBAIKAN ARAH) ===");
+  Serial.print("Target X1: "); Serial.println(targetX1);
+  Serial.print("Target X2: "); Serial.println(targetX2);
+  Serial.print("Target Y1: "); Serial.println(targetY1);
+  Serial.print("Target Y2: "); Serial.println(targetY2);
+  
+  bool x1Sesuai = false, x2Sesuai = false, y1Sesuai = false, y2Sesuai = false;
+  unsigned long startTime = millis();
+  const unsigned long timeout = 30000; // 30 detik timeout
+  
+  while (!(x1Sesuai && x2Sesuai && y1Sesuai && y2Sesuai) && (millis() - startTime < timeout)) {
+    int x1 = analogRead(XREAD1);
+    int x2 = analogRead(XREAD2);
+    int y1 = analogRead(YREAD1);
+    int y2 = analogRead(YREAD2);
+    
+    // Cek apakah sudah sesuai target
+    x1Sesuai = abs(x1 - targetX1) <= toleransi;
+    x2Sesuai = abs(x2 - targetX2) <= toleransi;
+    y1Sesuai = abs(y1 - targetY1) <= toleransi;
+    y2Sesuai = abs(y2 - targetY2) <= toleransi;
+    
+    // Kontrol motor X1 (Pintu Depan Kiri) - PERBAIKAN ARAH
+    if (!x1Sesuai) {
+      if (x1 < targetX1 - toleransi) {
+        // Buka pintu depan kiri (ke kiri) - ARAH DIPERBAIKI
+        digitalWrite(XLEAF1A, LOW); digitalWrite(XLEAF1B, HIGH);
+      } else if (x1 > targetX1 + toleransi) {
+        // Tutup pintu depan kiri (ke kanan) - ARAH DIPERBAIKI
+        digitalWrite(XLEAF1A, HIGH); digitalWrite(XLEAF1B, LOW);
+      } else {
+        digitalWrite(XLEAF1A, LOW); digitalWrite(XLEAF1B, LOW);
+      }
+    } else {
+      digitalWrite(XLEAF1A, LOW); digitalWrite(XLEAF1B, LOW);
+    }
+    
+    // Kontrol motor X2 (Pintu Depan Kanan) - PERBAIKAN ARAH
+    if (!x2Sesuai) {
+      if (x2 < targetX2 - toleransi) {
+        // Buka pintu depan kanan (ke kanan) - ARAH DIPERBAIKI
+        digitalWrite(XLEAF2A, LOW); digitalWrite(XLEAF2B, HIGH);
+      } else if (x2 > targetX2 + toleransi) {
+        // Tutup pintu depan kanan (ke kiri) - ARAH DIPERBAIKI
+        digitalWrite(XLEAF2A, HIGH); digitalWrite(XLEAF2B, LOW);
+      } else {
+        digitalWrite(XLEAF2A, LOW); digitalWrite(XLEAF2B, LOW);
+      }
+    } else {
+      digitalWrite(XLEAF2A, LOW); digitalWrite(XLEAF2B, LOW);
+    }
+    
+    // Kontrol motor Y1 (Pintu Belakang Kiri) - PERBAIKAN ARAH
+    if (!y1Sesuai) {
+      if (y1 < targetY1 - toleransi) {
+        // Buka pintu belakang kiri (ke atas) - ARAH DIPERBAIKI
+        digitalWrite(YLEAF1A, LOW); digitalWrite(YLEAF1B, HIGH);
+      } else if (y1 > targetY1 + toleransi) {
+        // Tutup pintu belakang kiri (ke bawah) - ARAH DIPERBAIKI
+        digitalWrite(YLEAF1A, HIGH); digitalWrite(YLEAF1B, LOW);
+      } else {
+        digitalWrite(YLEAF1A, LOW); digitalWrite(YLEAF1B, LOW);
+      }
+    } else {
+      digitalWrite(YLEAF1A, LOW); digitalWrite(YLEAF1B, LOW);
+    }
+    
+    // Kontrol motor Y2 (Pintu Belakang Kanan) - PERBAIKAN ARAH
+    if (!y2Sesuai) {
+      if (y2 < targetY2 - toleransi) {
+        // Buka pintu belakang kanan (ke bawah) - ARAH DIPERBAIKI
+        digitalWrite(YLEAF2A, HIGH); digitalWrite(YLEAF2B, LOW);
+      } else if (y2 > targetY2 + toleransi) {
+        // Tutup pintu belakang kanan (ke atas) - ARAH DIPERBAIKI
+        digitalWrite(YLEAF2A, LOW); digitalWrite(YLEAF2B, HIGH);
+      } else {
+        digitalWrite(YLEAF2A, LOW); digitalWrite(YLEAF2B, LOW);
+      }
+    } else {
+      digitalWrite(YLEAF2A, LOW); digitalWrite(YLEAF2B, LOW);
+    }
+    
+    // Update tampilan setiap 500ms
+    static unsigned long lastUpdate = 0;
+    if (millis() - lastUpdate > 500) {
+      layar.setCursor(50, 100);
+      remot.setCursor(20, 60);
+      layar.print("X1:"); layar.print(x1); layar.print("("); layar.print(x1Sesuai ? "OK" : "NG"); layar.print(")");
+      remot.print("X1:"); remot.print(x1); remot.print("("); remot.print(x1Sesuai ? "OK" : "NG"); remot.print(")");
+      
+      layar.setCursor(50, 140);
+      remot.setCursor(20, 80);
+      layar.print("X2:"); layar.print(x2); layar.print("("); layar.print(x2Sesuai ? "OK" : "NG"); layar.print(")");
+      remot.print("X2:"); remot.print(x2); remot.print("("); remot.print(x2Sesuai ? "OK" : "NG"); remot.print(")");
+      
+      layar.setCursor(50, 180);
+      remot.setCursor(20, 100);
+      layar.print("Y1:"); layar.print(y1); layar.print("("); layar.print(y1Sesuai ? "OK" : "NG"); layar.print(")");
+      remot.print("Y1:"); remot.print(y1); remot.print("("); remot.print(y1Sesuai ? "OK" : "NG"); remot.print(")");
+      
+      layar.setCursor(50, 220);
+      remot.setCursor(20, 120);
+      layar.print("Y2:"); layar.print(y2); layar.print("("); layar.print(y2Sesuai ? "OK" : "NG"); layar.print(")");
+      remot.print("Y2:"); remot.print(y2); remot.print("("); remot.print(y2Sesuai ? "OK" : "NG"); remot.print(")");
+      
+      lastUpdate = millis();
+    }
+    
+    delay(10); // Delay kecil untuk stabilitas
+  }
+  
+  // Matikan semua motor setelah selesai
+  digitalWrite(XLEAF1A, LOW); digitalWrite(XLEAF1B, LOW);
+  digitalWrite(XLEAF2A, LOW); digitalWrite(XLEAF2B, LOW);
+  digitalWrite(YLEAF1A, LOW); digitalWrite(YLEAF1B, LOW);
+  digitalWrite(YLEAF2A, LOW); digitalWrite(YLEAF2B, LOW);
+  
+  // Baca nilai final
+  int finalX1 = analogRead(XREAD1);
+  int finalX2 = analogRead(XREAD2);
+  int finalY1 = analogRead(YREAD1);
+  int finalY2 = analogRead(YREAD2);
+  
+  bool semuaSesuai = abs(finalX1 - targetX1) <= toleransi && 
+                     abs(finalX2 - targetX2) <= toleransi && 
+                     abs(finalY1 - targetY1) <= toleransi && 
+                     abs(finalY2 - targetY2) <= toleransi;
+  
+  Serial.println("=== HASIL KONTROL MOTOR ===");
+  Serial.print("Final X1: "); Serial.print(finalX1); Serial.print(" (Target: "); Serial.print(targetX1); Serial.println(")");
+  Serial.print("Final X2: "); Serial.print(finalX2); Serial.print(" (Target: "); Serial.print(targetX2); Serial.println(")");
+  Serial.print("Final Y1: "); Serial.print(finalY1); Serial.print(" (Target: "); Serial.print(targetY1); Serial.println(")");
+  Serial.print("Final Y2: "); Serial.print(finalY2); Serial.print(" (Target: "); Serial.print(targetY2); Serial.println(")");
+  Serial.print("Status: "); Serial.println(semuaSesuai ? "SESUAI" : "TIDAK SESUAI");
+  
+  statusKolimasiBerhasil = semuaSesuai;
 }
 
 void setup() {
@@ -550,7 +698,7 @@ void resetPintu() {
   // Fungsi untuk menutup semua pintu kolimator secara otomatis
   // Kontrol motor sampai posisi tertutup tercapai
   Serial.println("Menutup pintu kolimator...");
-  kontrolMotorSampaiTarget(CLOSE_X1, CLOSE_X2, CLOSE_Y1, CLOSE_Y2);
+  kontrolMotorSampaiTargetPerbaikan(CLOSE_X1, CLOSE_X2, CLOSE_Y1, CLOSE_Y2);
 }
 
 void selesaiKolimasi() {
@@ -578,7 +726,7 @@ void selesaiKolimasi() {
   Serial.println("Mengontrol motor sampai target tercapai...");
 
   // Kontrol motor sampai target tercapai
-  kontrolMotorSampaiTarget(targetX1, targetX2, targetY1, targetY2);
+  kontrolMotorSampaiTargetPerbaikan(targetX1, targetX2, targetY1, targetY2);
 
   layar.setCursor(50, 250);
   remot.setCursor(20, 140);
@@ -636,7 +784,7 @@ void validasiIluminasi(bool tercapai) {
     resetPintu();
     // Buka pintu dan nyalakan lampu kembali
     digitalWrite(lampu, HIGH);
-    kontrolMotorSampaiTarget(TARGET_ILUMINASI_X1, TARGET_ILUMINASI_X2, TARGET_ILUMINASI_Y1, TARGET_ILUMINASI_Y2);
+    kontrolMotorSampaiTargetPerbaikan(TARGET_ILUMINASI_X1, TARGET_ILUMINASI_X2, TARGET_ILUMINASI_Y1, TARGET_ILUMINASI_Y2);
     // Tetap di halaman uji iluminasi, user bisa validasi ulang
     menungguValidasiIluminasi = true;
   }
@@ -769,7 +917,7 @@ void iluminasiMode() {
   
   // Kontrol motor untuk ukuran iluminasi (25x25 cm)
   Serial.println("Mengontrol motor untuk iluminasi (25x25 cm)...");
-  kontrolMotorSampaiTarget(TARGET_ILUMINASI_X1, TARGET_ILUMINASI_X2, TARGET_ILUMINASI_Y1, TARGET_ILUMINASI_Y2);
+  kontrolMotorSampaiTargetPerbaikan(TARGET_ILUMINASI_X1, TARGET_ILUMINASI_X2, TARGET_ILUMINASI_Y1, TARGET_ILUMINASI_Y2);
 
   Serial.println("\n=== MODE ILUMINASI ===");
   Serial.println("Lampu ON (100 lux)");
