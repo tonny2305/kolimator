@@ -310,60 +310,64 @@ void kontrolMotorSampaiTargetPerbaikan(int targetX1, int targetX2, int targetY1,
     y1Sesuai = abs(y1 - targetY1) <= toleransi;
     y2Sesuai = abs(y2 - targetY2) <= toleransi;
     
-    // Kontrol motor X1 (Pintu Depan Kiri) - PERBAIKAN ARAH
+    // Kontrol motor X1 (Pintu Depan Kiri) - PERBAIKAN BERDASARKAN LOGIKA DRIVER
     if (!x1Sesuai) {
       if (x1 < targetX1 - toleransi) {
-        // Buka pintu depan kiri (ke kiri) - ARAH DIPERBAIKI
+        // Buka pintu depan kiri (ke kiri) - LOW HIGH = MAJU
         digitalWrite(XLEAF1A, LOW); digitalWrite(XLEAF1B, HIGH);
       } else if (x1 > targetX1 + toleransi) {
-        // Tutup pintu depan kiri (ke kanan) - ARAH DIPERBAIKI
+        // Tutup pintu depan kiri (ke kanan) - HIGH LOW = MUNDUR
         digitalWrite(XLEAF1A, HIGH); digitalWrite(XLEAF1B, LOW);
       } else {
+        // Berhenti - LOW LOW = OFF
         digitalWrite(XLEAF1A, LOW); digitalWrite(XLEAF1B, LOW);
       }
     } else {
       digitalWrite(XLEAF1A, LOW); digitalWrite(XLEAF1B, LOW);
     }
     
-    // Kontrol motor X2 (Pintu Depan Kanan) - PERBAIKAN ARAH
+    // Kontrol motor X2 (Pintu Depan Kanan) - PERBAIKAN BERDASARKAN LOGIKA DRIVER
     if (!x2Sesuai) {
       if (x2 < targetX2 - toleransi) {
-        // Buka pintu depan kanan (ke kanan) - ARAH DIPERBAIKI
+        // Buka pintu depan kanan (ke kanan) - LOW HIGH = MAJU
         digitalWrite(XLEAF2A, LOW); digitalWrite(XLEAF2B, HIGH);
       } else if (x2 > targetX2 + toleransi) {
-        // Tutup pintu depan kanan (ke kiri) - ARAH DIPERBAIKI
+        // Tutup pintu depan kanan (ke kiri) - HIGH LOW = MUNDUR
         digitalWrite(XLEAF2A, HIGH); digitalWrite(XLEAF2B, LOW);
       } else {
+        // Berhenti - LOW LOW = OFF
         digitalWrite(XLEAF2A, LOW); digitalWrite(XLEAF2B, LOW);
       }
     } else {
       digitalWrite(XLEAF2A, LOW); digitalWrite(XLEAF2B, LOW);
     }
     
-    // Kontrol motor Y1 (Pintu Belakang Kiri) - PERBAIKAN ARAH
+    // Kontrol motor Y1 (Pintu Belakang Kiri) - PERBAIKAN BERDASARKAN LOGIKA DRIVER
     if (!y1Sesuai) {
       if (y1 < targetY1 - toleransi) {
-        // Buka pintu belakang kiri (ke atas) - ARAH DIPERBAIKI
+        // Buka pintu belakang kiri (ke atas) - LOW HIGH = MAJU
         digitalWrite(YLEAF1A, LOW); digitalWrite(YLEAF1B, HIGH);
       } else if (y1 > targetY1 + toleransi) {
-        // Tutup pintu belakang kiri (ke bawah) - ARAH DIPERBAIKI
+        // Tutup pintu belakang kiri (ke bawah) - HIGH LOW = MUNDUR
         digitalWrite(YLEAF1A, HIGH); digitalWrite(YLEAF1B, LOW);
       } else {
+        // Berhenti - LOW LOW = OFF
         digitalWrite(YLEAF1A, LOW); digitalWrite(YLEAF1B, LOW);
       }
     } else {
       digitalWrite(YLEAF1A, LOW); digitalWrite(YLEAF1B, LOW);
     }
     
-    // Kontrol motor Y2 (Pintu Belakang Kanan) - PERBAIKAN ARAH
+    // Kontrol motor Y2 (Pintu Belakang Kanan) - PERBAIKAN BERDASARKAN LOGIKA DRIVER
     if (!y2Sesuai) {
       if (y2 < targetY2 - toleransi) {
-        // Buka pintu belakang kanan (ke bawah) - ARAH DIPERBAIKI
-        digitalWrite(YLEAF2A, HIGH); digitalWrite(YLEAF2B, LOW);
-      } else if (y2 > targetY2 + toleransi) {
-        // Tutup pintu belakang kanan (ke atas) - ARAH DIPERBAIKI
+        // Buka pintu belakang kanan (ke bawah) - LOW HIGH = MAJU
         digitalWrite(YLEAF2A, LOW); digitalWrite(YLEAF2B, HIGH);
+      } else if (y2 > targetY2 + toleransi) {
+        // Tutup pintu belakang kanan (ke atas) - HIGH LOW = MUNDUR
+        digitalWrite(YLEAF2A, HIGH); digitalWrite(YLEAF2B, LOW);
       } else {
+        // Berhenti - LOW LOW = OFF
         digitalWrite(YLEAF2A, LOW); digitalWrite(YLEAF2B, LOW);
       }
     } else {
